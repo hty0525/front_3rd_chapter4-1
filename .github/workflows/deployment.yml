@@ -16,20 +16,13 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: /home/runner/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: Check cache status
-        run: |
-          if [ -d "~/.npm" ]; then echo "Cache is used"; else echo "No cache found"; fi
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Check cache folder
-        run: npm config get cache
 
       - name: Lint
         run: npm run lint
@@ -44,18 +37,10 @@ jobs:
       - name: Restore cache
         uses: actions/cache@v3
         with:
-          path: ~/.npm
+          path: /home/runner/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-
-      - name: Check cache status
-
-        run: |
-          if [ -d "~/.npm" ]; then echo "Cache is used"; else echo "No cache found"; fi
-
-      - name: Check cache folder
-        run: npm config get cache
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
         run: npm ci
