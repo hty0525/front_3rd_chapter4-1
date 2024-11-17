@@ -47,8 +47,12 @@ jobs:
             ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
 
       - name: Check cache status
+
         run: |
           if [ -d "~/.npm" ]; then echo "Cache is used"; else echo "No cache found"; fi
+
+      - name: Check cache folder
+        run: npm config get cache
 
       - name: Install dependencies
         run: npm ci
